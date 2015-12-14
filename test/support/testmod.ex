@@ -1,11 +1,6 @@
 defmodule Testmod do
   import  Narp
 
-  defguarded everything_ok?(arg) when is_number(arg) do
-    {:ok, msg} -> msg
-    {:error, msg} -> msg
-  end
-
   defguarded everything_ok?(arg) when is_binary(arg) do
     {:ok, msg} -> msg
     {:error, msg} -> msg
@@ -16,4 +11,7 @@ defmodule Testmod do
     {:error, msg} -> {:error, msg}
   end
 
+  defguarded no_policy do
+    {:ok, :yarp} -> :ok
+  end
 end

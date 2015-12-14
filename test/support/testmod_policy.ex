@@ -1,12 +1,5 @@
 defmodule TestmodPolicy do
 
-  def everything_ok?(arg) when is_number(arg) do
-    case arg do
-      1 -> {:ok, :yarp}
-      0 -> {:error, :narp}
-    end
-  end
-
   def everything_ok?(arg) when is_binary(arg) do
     case arg do
       "Michael" -> {:ok, :yarp}
@@ -22,4 +15,7 @@ defmodule TestmodPolicy do
     {:error, "only numbers allowed"}
   end
 
+  def default_policy() do
+    {:ok, :yarp}
+  end
 end

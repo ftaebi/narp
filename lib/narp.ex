@@ -11,9 +11,18 @@ defmodule Narp do
     {fun_name, args_ast} = name_and_args(head)
     quote do
       def unquote(head) do
-        policy_module = __MODULE__ |> to_string |> Kernel.<>("Policy") |> String.to_atom
-        case apply(policy_module, unquote(fun_name), unquote(args_ast)) do
-           unquote body[:do]
+        function = unquote fun_name
+        args = unquote args_ast
+        policy_module = 
+          __MODULE__ 
+          |> to_string 
+          |> Kernel.<>("Policy") 
+          |> String.to_atom
+        unless {function, length(args)} in policy_module.__info__(:functions) do
+          function = :default_policy
+        end
+        case apply(policy_module, function, args) do
+          unquote body[:do]
         end
       end
     end
