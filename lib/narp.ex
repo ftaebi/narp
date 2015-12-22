@@ -7,12 +7,27 @@ defmodule Narp do
     Macro.decompose_call(function_head)
   end
 
-  defmacro defguarded(head, body) do
-    {fun_name, args_ast} = name_and_args(head)
+  defmacro defg(head, [with: module_and_function], body) do
+    {_policy_function_ast, args_ast} = name_and_args(head)
+    {policy_module_ast, policy_function_ast} = module_and_function
     quote do
       def unquote(head) do
-        function = unquote fun_name
         args = unquote args_ast
+        policy_function = unquote(policy_function_ast)
+        policy_module = unquote(policy_module_ast)
+        case apply(policy_module, policy_function, args) do
+          unquote body[:do]
+        end
+      end
+    end
+  end
+
+  defmacro defg(head, body) do
+    {policy_function_ast, args_ast} = name_and_args(head)
+    quote do
+      def unquote(head) do
+        args = unquote args_ast
+        function = unquote policy_function_ast
         policy_module = 
           __MODULE__ 
           |> to_string 

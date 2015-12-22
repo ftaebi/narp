@@ -12,4 +12,7 @@ defmodule NarpTest do
     assert Testmod.no_policy == :ok
   end
 
+  test "uses a custom policy function if provided" do
+    assert Foo.bar(fn(x) -> :math.exp(x) end, 3) === :math.exp(3) 
+  end
 end
