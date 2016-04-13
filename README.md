@@ -24,7 +24,7 @@ Alternatively you can use the available hex package by using.
 
 
 ```
-{:narp, "~> 0.1.0"},
+{:narp, "~> 0.0.1"},
 ```
 
 
