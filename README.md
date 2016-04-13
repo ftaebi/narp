@@ -2,8 +2,6 @@
 
 _(Nuclear Access Restriction Policies)_
 
-![image](narp.jpg)
-
 Narp is an easy and flexible way to authorize function calls in elixir. It has partly been inspired by the pundit project and can be used with plain elixir or beneath a phoenix project.
 
 ### Features
