@@ -84,7 +84,7 @@ defmodule YourProject.YourRessourceController do
   end
 end
 
-defmodule YourProject.YourRessourcePolicy do
+defmodule YourProject.YourRessourceControllerPolicy do
   def show(conn, %{"user_id" => user_id}) do
     if valid_user_id?(user_id) do
       :valid_user_id
@@ -100,7 +100,7 @@ end
 ```
 
 
-Sometimes you may want to use a single policy module to guard multiple functions in different modules. In this case you can tell Narp wich policy module and wich policy function to use:
+Sometimes you may want to use a single policy module to guard multiple functions in different modules. In this case you can tell Narp which policy module and which policy function to use:
 
 ```
 defmodule YourProject.YourModule
@@ -166,7 +166,7 @@ defmodule YourProject.YourRessourceController do
   end
 end
 
-defmodule YourProject.YourRessourcePolicy do
+defmodule YourProject.YourRessourceControllerPolicy do
   def default_policy(conn, %{"user_id" => user_id}) do
     case user_id do
       15 -> :ok
